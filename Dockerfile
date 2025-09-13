@@ -9,8 +9,5 @@ RUN apt update && apt install -y \
     g++ \
     qt6-base-dev \
     qt6-declarative-dev \
-    libxkbcommon-dev
-
-COPY . /scorched-earth
-
-WORKDIR /scorched-earth
+    libxkbcommon-dev \
+    qml6-module-*
