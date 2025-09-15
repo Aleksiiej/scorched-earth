@@ -1,0 +1,10 @@
+name: CI during commit
+on: [push, pull_request]
+jobs:
+  build:
+    runs on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Build binary
+        run: mkdir build && cd build && cmake .. && make
