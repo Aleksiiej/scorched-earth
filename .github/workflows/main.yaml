@@ -7,8 +7,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Build binary
-        run: sudo apt --fix-broken install
-             sudo apt update && apt install -y \
+        run: apt update && apt --fix-broken install -y \
              git \
              valgrind \
              clang-format \
