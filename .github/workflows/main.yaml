@@ -3,9 +3,10 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: aleksiiej/scorched-earth:latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Build binary
-        run: sudo apt update && sudo apt install -y g++ cmake make qt6-base-dev qt6-declarative-dev libxkbcommon-dev qml6-module-* &&
-             mkdir build && cd build && cmake .. && make
+        run:  mkdir build && cd build && cmake .. && make
