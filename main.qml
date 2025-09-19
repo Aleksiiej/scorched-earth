@@ -1,43 +1,16 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.0
+import Felgo 4.0
 
-Window {
-    id: root
-    visible: true
-    width: 640
-    height: 480
-    color: "lightblue"
-    title: qsTr("Scorched Earth")
+ GameWindow 
+ {
 
-    Loader {
-        id: mainLoader
-        anchors.fill: parent
-    }
+   Rectangle 
+   {
+     color: "#000000"
+     anchors.fill: parent
+   }
 
-    Column {
-        id: mainColumn
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 20
-
-        Button{
-            id: startButton
-            text: "Start Game"
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                console.log("Game Started")
-                mainColumn.visible = false
-                mainLoader.source = "gameStage.qml"
-            }
-        }
-
-        Button{
-            id: exitButton
-            text: "Exit"
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                Qt.quit()
-            }
-        }
-    }
-}   
+   Scene 
+   {
+   }
+ }
