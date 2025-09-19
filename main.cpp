@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
-    const QUrl url(u"qrc:/scorched-earth/main.qml"_qs);
+    const QUrl url(u"qrc:/scorched-earth/qml/main.qml"_qs);
     engine.load(url);
 
     return app.exec();
