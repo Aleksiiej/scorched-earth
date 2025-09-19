@@ -20,4 +20,5 @@ qt_add_qml_module(${PROJECT_NAME}
     URI scorched-earth
     VERSION 1.0
     QML_FILES qml/main.qml
+              qml/MainMenu.qml
 )
