@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Felgo 4.0
+import "scenes"
 
 
 GameWindow 
@@ -9,23 +10,33 @@ GameWindow
   screenHeight: 768
   title: "Scorched Earth"
 
-  Scene 
+  MenuScene
   {
-    id: scene
-    width: gameWindow.screenWidth
-    height: gameWindow.screenHeight
-    anchors.fill: parent
+    id: menuScene
 
-    Rectangle
-    {
-      anchors.fill: parent
-      color: "lightgrey"
-
-      MainMenu
-      {
-        id: mainMenu
-        anchors.centerIn: parent
-      }
-    }
+    onStartGamePressed: gameWindow.state = "game"
   }
+
+  GameScene
+  {
+    id: gameScene
+  }
+
+  state: "menu"
+  
+  states:
+  [
+    State
+    {
+      name: "menu"
+      PropertyChanges {target: menuScene; opacity: 1}
+      PropertyChanges {target: gameWindow; activeScene: menuScene}
+    },
+    State
+    {
+      name: "game"
+      PropertyChanges {target: gameScene; opacity: 1}
+      PropertyChanges {target: gameWindow; activeScene: gameScene}
+    }
+  ]
 }
