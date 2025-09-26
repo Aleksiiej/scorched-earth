@@ -20,6 +20,8 @@ GameWindow
   GameScene
   {
     id: gameScene
+
+    onBackToMenuPressed: gameWindow.state = "menu"
   }
 
   state: "menu"
@@ -32,6 +34,7 @@ GameWindow
       PropertyChanges {target: menuScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: menuScene}
     },
+
     State
     {
       name: "game"

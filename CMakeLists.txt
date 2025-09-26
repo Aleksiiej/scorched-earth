@@ -21,6 +21,7 @@ qt_add_qml_module(${PROJECT_NAME}
     VERSION 1.0
     QML_FILES qml/main.qml
               qml/common/MenuButton.qml
+              qml/common/GameButton.qml
               qml/common/SceneBase.qml
               qml/scenes/GameScene.qml
               qml/scenes/MenuScene.qml

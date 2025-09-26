@@ -8,6 +8,7 @@ SceneBase
     id: gameScene
 
     property alias player: player
+    signal backToMenuPressed
 
     Rectangle
     {
@@ -38,6 +39,16 @@ SceneBase
                     x += 10;;
                 }
             }
+        }
+
+        GameButton
+        {
+            text: "Back to Menu"
+
+            onClicked: backToMenuPressed()
+
+            x: 50
+            y: 50
         }
     }
 }
