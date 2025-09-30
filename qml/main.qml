@@ -10,6 +10,12 @@ GameWindow
   screenHeight: 768
   title: "Scorched Earth"
 
+  EntityManager
+  {
+    id: entityManager
+    entityContainer: gameScene
+  }
+
   MenuScene
   {
     id: menuScene

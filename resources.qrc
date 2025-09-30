@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/scorched-earth">
+        <file>assets/img/tankblue.png</file>
+    </qresource>
+</RCC>
