@@ -45,7 +45,6 @@ GameWindow
       name: "game"
       PropertyChanges {target: gameScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
-      // StateChangeScript { script: Qt.callLater( function() { gameScene.player.focus = true; } ) }
     }
   ]
 }

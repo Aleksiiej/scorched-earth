@@ -1,6 +1,7 @@
 import Felgo 4.0
 import QtQuick 2.0
 import "../common"
+import "../entities"
 
 
 SceneBase
@@ -28,26 +29,9 @@ SceneBase
         debugDrawVisible: false
     }
 
-    EntityBase
+    Ground
     {
         id: ground1
-        entityType: "ground"
-        height: 50
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        Rectangle
-        {
-            anchors.fill: parent
-            color: "green"
-        }
-        BoxCollider
-        {
-            anchors.fill: parent
-            bodyType: Body.Static
-        }
     }
     
     Rectangle
@@ -62,44 +46,10 @@ SceneBase
             bottom: ground1.top
         }
     }
-    
-    EntityBase
-    {
-        id: player
-        entityId: "player"
-        entityType: "tank"
-        x: parent.width / 2 - playerImage.width / 2
-        y: parent.height / 2 - playerImage.height / 2
 
-        Image
-        {
-            id: playerImage
-            source: "qrc:/scorched-earth/assets/img/tankblue.png"
-            width: 50
-            height: 50
-        }
-        BoxCollider
-        {
-            id: playerCollider
-            anchors.fill: playerImage
-        }
-        Keys.onPressed:
-        {
-            switch(event.key)
-            {
-                case Qt.Key_Left:
-                    playerCollider.force = Qt.point(-200, 0);
-                    break; 
-                case Qt.Key_Right: 
-                    playerCollider.force = Qt.point(200, 0);
-                    break;
-                case Qt.Key_Up:
-                    break;
-                case Qt.Key_Down:
-                    break;
-            }
-        }
-        Keys.onReleased: playerCollider.force = Qt.point(0, 0);
+    Player
+    {
+        id: player1
     }
 
     GameButton
