@@ -40,22 +40,12 @@ GameWindow
       PropertyChanges {target: menuScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: menuScene}
     },
-
     State
     {
       name: "game"
       PropertyChanges {target: gameScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
-      StateChangeScript
-      {
-        script:
-        {
-          Qt.callLater(function()
-          {
-            gameScene.player.forceActiveFocus();
-          });
-        }
-      } 
+      // StateChangeScript { script: Qt.callLater( function() { gameScene.player.focus = true; } ) }
     }
   ]
 }

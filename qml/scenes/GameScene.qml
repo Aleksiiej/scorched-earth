@@ -7,8 +7,12 @@ SceneBase
 {
     id: gameScene
 
-    property alias player: player
+    anchors.fill: parent
+    Keys.forwardTo: player
+
     signal backToMenuPressed
+
+    property alias player: player
 
     PhysicsWorld
     {
@@ -24,90 +28,85 @@ SceneBase
         debugDrawVisible: false
     }
 
-    Rectangle
+    EntityBase
     {
-        id: gameArea
-
-        anchors.fill: parent.gameWindowAnchorItem
-        color: "blue"
-
-        EntityBase
-        {
-            entityId: "player"
-            entityType: "tank"
-            x: parent.width / 2 - playerImage.width / 2
-            y: parent.height / 2 - playerImage.height / 2
-    
-            Image
-            {
-                id: playerImage
-                source: "qrc:/scorched-earth/assets/img/tankblue.png"
-                width: 50
-                height: 50
-            }
-
-            BoxCollider
-            {
-                anchors.fill: playerImage
-            }
+        id: ground1
+        entityType: "ground"
+        height: 50
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
-
-        EntityBase
-        {
-            id: "ground1"
-            entityType: "ground"
-            height: 20
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: "green"
-            }
-
-            BoxCollider
-            {
-                anchors.fill: parent
-                bodyType: Body.Static
-            }
-        }
-
         Rectangle
         {
-            id: player
+            anchors.fill: parent
+            color: "green"
+        }
+        BoxCollider
+        {
+            anchors.fill: parent
+            bodyType: Body.Static
+        }
+    }
+    
+    Rectangle
+    {
+        id: sky
+        color: "skyblue"
 
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: ground1.top
+        }
+    }
+    
+    EntityBase
+    {
+        id: player
+        entityId: "player"
+        entityType: "tank"
+        x: parent.width / 2 - playerImage.width / 2
+        y: parent.height / 2 - playerImage.height / 2
+
+        Image
+        {
+            id: playerImage
+            source: "qrc:/scorched-earth/assets/img/tankblue.png"
             width: 50
             height: 50
-            color: "red"
-            x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
-
-            Keys.onPressed:
+        }
+        BoxCollider
+        {
+            id: playerCollider
+            anchors.fill: playerImage
+        }
+        Keys.onPressed:
+        {
+            switch(event.key)
             {
-
-                if (event.key === Qt.Key_Left)
-                {
-                    x -= 10;
-                } 
-                else if (event.key === Qt.Key_Right)
-                {
-                    x += 10;;
-                }
+                case Qt.Key_Left:
+                    playerCollider.force = Qt.point(-200, 0);
+                    break; 
+                case Qt.Key_Right: 
+                    playerCollider.force = Qt.point(200, 0);
+                    break;
+                case Qt.Key_Up:
+                    break;
+                case Qt.Key_Down:
+                    break;
             }
         }
+        Keys.onReleased: playerCollider.force = Qt.point(0, 0);
+    }
 
-        GameButton
-        {
-            text: "Back to Menu"
-
-            onClicked: backToMenuPressed()
-
-            x: 50
-            y: 50
-        }
+    GameButton
+    {
+        text: "Back to Menu"
+        onClicked: backToMenuPressed()
+        x: 50
+        y: 50
     }
 }
