@@ -12,11 +12,13 @@ EntityBase
         right: parent.right
         bottom: parent.bottom
     }
+
     Rectangle
     {
         anchors.fill: parent
         color: "green"
     }
+    
     BoxCollider
     {
         anchors.fill: parent

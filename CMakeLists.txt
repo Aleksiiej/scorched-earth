@@ -29,4 +29,5 @@ qt_add_qml_module(${PROJECT_NAME}
               qml/scenes/MenuScene.qml
               qml/entities/Player.qml
               qml/entities/Ground.qml
+              qml/entities/Wall.qml
 )

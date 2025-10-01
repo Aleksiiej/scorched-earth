@@ -8,6 +8,7 @@ EntityBase
     entityType: "tank"
     x: parent.width / 2 - playerImage.width / 2
     y: parent.height / 2 - playerImage.height / 2
+
     Image
     {
         id: playerImage
@@ -15,12 +16,14 @@ EntityBase
         width: 50
         height: 50
     }
+
     BoxCollider
     {
         id: playerCollider
         anchors.fill: playerImage
     }
-    Keys.onPressed:
+
+    Keys.onPressed: function(event)
     {
         switch(event.key)
         {
@@ -32,5 +35,6 @@ EntityBase
                 break;
         }
     }
+
     Keys.onReleased: playerCollider.force = Qt.point(0, 0);
 }

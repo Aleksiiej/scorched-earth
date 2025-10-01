@@ -6,9 +6,9 @@ import "scenes"
 GameWindow 
 {
   id: gameWindow
+  title: "Scorched Earth"
   screenWidth: 1024
   screenHeight: 768
-  title: "Scorched Earth"
 
   EntityManager
   {
@@ -19,14 +19,12 @@ GameWindow
   MenuScene
   {
     id: menuScene
-
     onStartGamePressed: gameWindow.state = "game"
   }
 
   GameScene
   {
     id: gameScene
-
     onBackToMenuPressed: gameWindow.state = "menu"
   }
 

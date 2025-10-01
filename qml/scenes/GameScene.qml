@@ -7,13 +7,11 @@ import "../entities"
 SceneBase
 {
     id: gameScene
-
     anchors.fill: parent
-    Keys.forwardTo: player
+    
+    Keys.forwardTo: player1
 
     signal backToMenuPressed
-
-    property alias player: player
 
     PhysicsWorld
     {
@@ -38,7 +36,6 @@ SceneBase
     {
         id: sky
         color: "skyblue"
-
         anchors {
             top: parent.top
             left: parent.left
@@ -50,6 +47,18 @@ SceneBase
     Player
     {
         id: player1
+    }
+
+    Wall
+    {
+        id: leftWall
+        anchors.left: parent.left
+    }
+
+    Wall
+    {
+        id: rightWall
+        anchors.right: parent.right
     }
 
     GameButton
