@@ -6,21 +6,35 @@ EntityBase
     id: playerBase
     entityId: "player"
     entityType: "tank"
-    x: parent.width / 2 - playerImage.width / 2
-    y: parent.height / 2 - playerImage.height / 2
+    x: parent.width / 2
+    y: parent.height / 2
 
     Image
     {
-        id: playerImage
-        source: "qrc:/scorched-earth/assets/img/tankblue.png"
-        width: 50
-        height: 50
+        id: tankTracksImg
+        source: "qrc:/scorched-earth/assets/img/tanks_tankTracks3.png"
+        anchors.verticalCenter: tankBodyImg.bottom
+        anchors.horizontalCenter: tankBodyImg.horizontalCenter
+    }
+
+    Image
+    {
+        id: tankBodyImg
+        source: "qrc:/scorched-earth/assets/img/tanks_tankGreen_body3.png"
+    }
+
+    Image
+    {
+        id: tankTurretImg
+        source: "qrc:/scorched-earth/assets/img/tanks_turret1.png"
+        anchors.bottom: tankBodyImg.verticalCenter
+        anchors.horizontalCenter: tankBodyImg.horizontalCenter
     }
 
     BoxCollider
     {
         id: playerCollider
-        anchors.fill: playerImage
+        anchors.fill: tankTracksImg
     }
 
     Keys.onPressed: function(event)
