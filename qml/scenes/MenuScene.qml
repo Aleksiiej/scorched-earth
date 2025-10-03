@@ -1,5 +1,6 @@
 import Felgo 4.0
 import QtQuick 2.0
+import QtQuick.Layouts
 import "../common"
 
 
@@ -24,18 +25,23 @@ SceneBase
         text: "Scorched Earth"
     }
 
-    Column
+    ColumnLayout
     {
         anchors.centerIn: parent
+        spacing: 20
 
         MenuButton
         {
             text: "StartGame"
+            Layout.alignment: Qt.AlignHCenter
+            
             onClicked: startGamePressed()
         }
         MenuButton
         {
             text: "Exit"
+            Layout.alignment: Qt.AlignHCenter
+
             onClicked: Qt.quit()
         }
     }

@@ -27,7 +27,8 @@ EntityBase
     {
         id: tankTurretImg
         source: "qrc:/scorched-earth/assets/img/tanks_turret1.png"
-        anchors.bottom: tankBodyImg.verticalCenter
+        anchors.bottom: tankBodyImg.top
+        anchors.bottomMargin: -10
         anchors.horizontalCenter: tankBodyImg.horizontalCenter
         transformOrigin: Item.Bottom
     }
@@ -49,10 +50,10 @@ EntityBase
                 playerCollider.force = Qt.point(200, 0);
                 break;
             case Qt.Key_Up:
-                tankTurretImg.rotation += 15;
+                tankTurretImg.rotation += 4;
                 break;
             case Qt.Key_Down:
-                tankTurretImg.rotation -= 15;
+                tankTurretImg.rotation -= 4;
                 break;
         }
     }

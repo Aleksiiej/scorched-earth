@@ -7,8 +7,13 @@ GameWindow
 {
   id: gameWindow
   title: "Scorched Earth"
-  screenWidth: 1024
-  screenHeight: 768
+  
+  width: 1024
+  height: 768
+  minimumWidth: width
+  maximumWidth: width
+  minimumHeight: height
+  maximumHeight: height
 
   EntityManager
   {
