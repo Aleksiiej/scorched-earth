@@ -10,11 +10,13 @@ EntityBase
     y: parent.height / 2
 
     property alias movementTimer: movementTimer
+    property alias playerCollider: playerCollider
 
     property bool leftPressed: false
     property bool rightPressed: false
     property bool upPressed: false
     property bool downPressed: false
+    property int rotationAngle: 0
 
     Image
     {
@@ -105,13 +107,15 @@ EntityBase
             {
                 playerCollider.force = Qt.point(0, 0)
             }
-            if(upPressed)
+            if(upPressed && rotationAngle < 100)
             {
                 tankTurretImg.rotation += 4
+                rotationAngle += 4
             }
-            if(downPressed)
+            if(downPressed && rotationAngle > -100)
             {
                 tankTurretImg.rotation -= 4
+                rotationAngle -= 4
             }
         }
     }
