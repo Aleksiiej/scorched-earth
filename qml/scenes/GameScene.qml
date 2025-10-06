@@ -8,6 +8,8 @@ SceneBase
 {
     id: gameScene
     anchors.fill: parent
+
+    property alias player1: player1
     
     Keys.forwardTo: player1
 
@@ -67,5 +69,12 @@ SceneBase
         onClicked: backToMenuPressed()
         x: 50
         y: 50
+    }
+
+    function resetGame()
+    {
+        player1.x = parent.width / 2
+        player1.y = parent.height / 2
+        player1.movementTimer.running = true
     }
 }

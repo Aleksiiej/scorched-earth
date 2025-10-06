@@ -9,6 +9,23 @@ EntityBase
     x: parent.width / 2
     y: parent.height / 2
 
+    property alias movementTimer: movementTimer
+
+    property bool leftPressed: false
+    property bool rightPressed: false
+    property bool upPressed: false
+    property bool downPressed: false
+
+    Image
+    {
+        id: tankTurretImg
+        source: "qrc:/scorched-earth/assets/img/tanks_turret1.png"
+        anchors.bottom: tankBodyImg.top
+        anchors.bottomMargin: -10
+        anchors.horizontalCenter: tankBodyImg.horizontalCenter
+        transformOrigin: Item.Bottom
+    }
+
     Image
     {
         id: tankTracksImg
@@ -23,16 +40,6 @@ EntityBase
         source: "qrc:/scorched-earth/assets/img/tanks_tankGreen_body3.png"
     }
 
-    Image
-    {
-        id: tankTurretImg
-        source: "qrc:/scorched-earth/assets/img/tanks_turret1.png"
-        anchors.bottom: tankBodyImg.top
-        anchors.bottomMargin: -10
-        anchors.horizontalCenter: tankBodyImg.horizontalCenter
-        transformOrigin: Item.Bottom
-    }
-
     BoxCollider
     {
         id: playerCollider
@@ -44,19 +51,68 @@ EntityBase
         switch(event.key)
         {
             case Qt.Key_Left:
-                playerCollider.force = Qt.point(-200, 0);
-                break; 
-            case Qt.Key_Right: 
-                playerCollider.force = Qt.point(200, 0);
-                break;
+                leftPressed = true
+                break
+            case Qt.Key_Right:
+                rightPressed = true
+                break
             case Qt.Key_Up:
-                tankTurretImg.rotation += 4;
-                break;
+                upPressed = true
+                break
             case Qt.Key_Down:
-                tankTurretImg.rotation -= 4;
-                break;
+                downPressed = true
+                break
         }
     }
 
-    Keys.onReleased: playerCollider.force = Qt.point(0, 0);
+    Keys.onReleased: function(event)
+    {
+        switch(event.key)
+        {
+            case Qt.Key_Left:
+                leftPressed = false
+                break
+            case Qt.Key_Right:
+                rightPressed = false
+                break
+            case Qt.Key_Up:
+                upPressed = false
+                break
+            case Qt.Key_Down:
+                downPressed = false
+                break
+        }
+    }
+
+    Timer
+    {
+        id: movementTimer
+        interval: 16
+        running: false
+        repeat: true
+        
+        onTriggered:
+        {
+            if(leftPressed)
+            {
+                playerCollider.force = Qt.point(-200, 0)
+            }
+            else if(rightPressed)
+            {
+                playerCollider.force = Qt.point(200, 0)
+            }
+            else
+            {
+                playerCollider.force = Qt.point(0, 0)
+            }
+            if(upPressed)
+            {
+                tankTurretImg.rotation += 4
+            }
+            if(downPressed)
+            {
+                tankTurretImg.rotation -= 4
+            }
+        }
+    }
 }

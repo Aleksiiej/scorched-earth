@@ -24,7 +24,11 @@ GameWindow
   MenuScene
   {
     id: menuScene
-    onStartGamePressed: gameWindow.state = "game"
+    onStartGamePressed:
+    {
+      gameWindow.state = "game"
+      gameScene.resetGame()
+    }
   }
 
   GameScene
