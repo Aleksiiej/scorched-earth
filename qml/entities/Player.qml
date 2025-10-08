@@ -6,17 +6,11 @@ EntityBase
     id: playerBase
     entityId: "player"
     entityType: "tank"
-    x: parent.width / 2
-    y: parent.height / 2
-
-    property alias movementTimer: movementTimer
-    property alias playerCollider: playerCollider
 
     property bool leftPressed: false
     property bool rightPressed: false
     property bool upPressed: false
     property bool downPressed: false
-    property int rotationAngle: 0
 
     Image
     {
@@ -107,16 +101,24 @@ EntityBase
             {
                 playerCollider.force = Qt.point(0, 0)
             }
-            if(upPressed && rotationAngle < 100)
+
+            if(upPressed && tankTurretImg.rotation < 100)
             {
                 tankTurretImg.rotation += 4
-                rotationAngle += 4
             }
-            if(downPressed && rotationAngle > -100)
+            if(downPressed && tankTurretImg.rotation > -100)
             {
                 tankTurretImg.rotation -= 4
-                rotationAngle -= 4
             }
         }
+    }
+
+    function resetPlayer(groundHeight)
+    {
+        x = parent.width / 2
+        y = parent.height - groundHeight - tankTracksImg.height
+        tankTurretImg.rotation = 0
+        playerCollider.linearVelocity = Qt.point(0, 0)
+        movementTimer.running = true
     }
 }

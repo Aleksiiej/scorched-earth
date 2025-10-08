@@ -73,9 +73,6 @@ SceneBase
 
     function resetGame()
     {
-        player1.x = parent.width / 2
-        player1.y = parent.height / 2
-        player1.rotationAngle = 0
-        player1.movementTimer.running = true
+        player1.resetPlayer(ground1.height)
     }
 }
