@@ -11,6 +11,9 @@ EntityBase
     property bool rightPressed: false
     property bool upPressed: false
     property bool downPressed: false
+    property bool spacePressed: false
+
+    signal shot()
 
     Image
     {
@@ -57,6 +60,9 @@ EntityBase
                 break
             case Qt.Key_Down:
                 downPressed = true
+                break
+            case Qt.Key_Space:
+                spacePressed = true
                 break
         }
     }
@@ -109,6 +115,11 @@ EntityBase
             if(downPressed && tankTurretImg.rotation > -100)
             {
                 tankTurretImg.rotation -= 4
+            }
+            if(spacePressed)
+            {
+                spacePressed = false
+                playerBase.shot()
             }
         }
     }

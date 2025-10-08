@@ -49,6 +49,12 @@ SceneBase
     Player
     {
         id: player1
+        onShot:
+        {
+            console.log("Bang!");
+            entityManager.createEntityFromUrl(
+                          Qt.resolvedUrl("../entities/Bullet.qml"))
+        }
     }
 
     Wall

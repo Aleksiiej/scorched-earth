@@ -3,5 +3,6 @@
         <file>assets/img/tanks_turret1.png</file>
         <file>assets/img/tanks_tankGreen_body3.png</file>
         <file>assets/img/tanks_tankTracks3.png</file>
+        <file>assets/img/tank_bulletFly1.png</file>
     </qresource>
 </RCC>
