@@ -95,11 +95,11 @@ EntityBase
         
         onTriggered:
         {
-            if(leftPressed)
+            if(leftPressed && playerCollider.linearVelocity.x > -250)
             {
                 playerCollider.force = Qt.point(-200, 0)
             }
-            else if(rightPressed)
+            else if(rightPressed && playerCollider.linearVelocity.x < 250)
             {
                 playerCollider.force = Qt.point(200, 0)
             }
