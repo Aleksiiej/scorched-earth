@@ -51,9 +51,17 @@ SceneBase
         id: player1
         onShot:
         {
-            console.log("Bang!");
-            entityManager.createEntityFromUrl(
-                          Qt.resolvedUrl("../entities/Bullet.qml"))
+            console.log("Bang!")
+            console.log(player1.x)
+            console.log(player1.y)
+            var newBulletProperties = {
+                x: player1.x + tankBodyImg.width/2,
+                y: player1.y,
+                rotation: player1.tankTurretImg.rotation - 90
+            }
+            entityManager.createEntityFromUrlWithProperties(
+                          Qt.resolvedUrl("../entities/Bullet.qml"),
+                          newBulletProperties)
         }
     }
 

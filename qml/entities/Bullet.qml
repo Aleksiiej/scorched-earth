@@ -11,5 +11,6 @@ EntityBase
     {
         id: bulletImg
         source: "qrc:/scorched-earth/assets/img/tank_bulletFly1.png"
+        transformOrigin: Item.Bottom
     }
 }

@@ -13,6 +13,9 @@ EntityBase
     property bool downPressed: false
     property bool spacePressed: false
 
+    property alias tankTurretImg: tankTurretImg
+    property alias tankBodyImg: tankBodyImg
+
     signal shot()
 
     Image
