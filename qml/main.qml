@@ -15,19 +15,13 @@ GameWindow
   minimumHeight: height
   maximumHeight: height
 
-  EntityManager
-  {
-    id: entityManager
-    entityContainer: gameScene
-  }
-
   MenuScene
   {
     id: menuScene
     onStartGamePressed:
     {
       gameWindow.state = "game"
-      gameScene.resetGame()
+      gameScene.prepareNewGame()
     }
   }
 
@@ -44,13 +38,13 @@ GameWindow
     State
     {
       name: "menu"
-      PropertyChanges {target: menuScene; opacity: 1}
+      PropertyChanges {target: menuScene; opacity: 1;}
       PropertyChanges {target: gameWindow; activeScene: menuScene}
     },
     State
     {
       name: "game"
-      PropertyChanges {target: gameScene; opacity: 1}
+      PropertyChanges {target: gameScene; opacity: 1;}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
     }
   ]

@@ -9,11 +9,30 @@ SceneBase
     id: gameScene
     anchors.fill: parent
 
-    property alias player1: player1
-    
-    Keys.forwardTo: player1
-
     signal backToMenuPressed
+    property var player: null
+
+    Keys.onPressed: (event) =>
+    {
+        if(player)
+        {
+            player.handleInput(event.key, true)
+        }
+    }
+
+    Keys.onReleased: (event) =>
+    {
+        if(player)
+        {
+            player.handleInput(event.key, false)
+        }
+    }
+
+    EntityManager
+    {
+        id: entityManager
+        entityContainer: gameScene
+    }
 
     PhysicsWorld
     {
@@ -46,24 +65,6 @@ SceneBase
         }
     }
 
-    Player
-    {
-        id: player1
-        onShot:
-        {
-            console.log("Bang!")
-            var turretCenter = player1.mapToItem(null, player1.tankBodyImg.width/2, -player1.tankBodyImg.height)
-            var newBulletProperties = {
-                x: turretCenter.x - 9,
-                y: turretCenter.y,
-                rotation: player1.tankTurretImg.rotation 
-            }
-            entityManager.createEntityFromUrlWithProperties(
-                          Qt.resolvedUrl("../entities/Bullet.qml"),
-                          newBulletProperties)
-        }
-    }
-
     Wall
     {
         id: leftWall
@@ -79,14 +80,30 @@ SceneBase
     GameButton
     {
         text: "Back to Menu"
-        onClicked: backToMenuPressed()
+        onClicked:
+        {
+            backToMenuPressed()
+            cleanupAfterGame()
+        }
         x: 50
         y: 50
     }
 
-    function resetGame()
+    function prepareNewGame()
     {
-        player1.resetPlayer(ground1.height)
+        var newPlayerProperties = {
+            x: parent.width / 2,
+            y: parent.height - ground1.height - 40
+        }
+        entityManager.createEntityFromUrlWithProperties(
+                               Qt.resolvedUrl("../entities/Player.qml"),
+                               newPlayerProperties)
+        player = entityManager.getLastAddedEntity()
+    }
+
+    function cleanupAfterGame()
+    {
+        entityManager.removeEntitiesByFilter(["player"]);
         entityManager.removeEntitiesByFilter(["projectile"]);
     }
 }
