@@ -52,12 +52,11 @@ SceneBase
         onShot:
         {
             console.log("Bang!")
-            console.log(player1.x)
-            console.log(player1.y)
+            var turretCenter = player1.mapToItem(null, player1.tankBodyImg.width/2, -player1.tankBodyImg.height)
             var newBulletProperties = {
-                x: player1.x + tankBodyImg.width/2,
-                y: player1.y,
-                rotation: player1.tankTurretImg.rotation - 90
+                x: turretCenter.x - 9,
+                y: turretCenter.y,
+                rotation: player1.tankTurretImg.rotation 
             }
             entityManager.createEntityFromUrlWithProperties(
                           Qt.resolvedUrl("../entities/Bullet.qml"),
@@ -88,5 +87,6 @@ SceneBase
     function resetGame()
     {
         player1.resetPlayer(ground1.height)
+        entityManager.removeEntitiesByFilter(["projectile"]);
     }
 }

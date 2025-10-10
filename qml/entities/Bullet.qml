@@ -6,11 +6,11 @@ EntityBase
     id: bulletBase
     entityId: "bullet"
     entityType: "projectile"
+    transformOrigin: Item.Top
 
     Image
     {
         id: bulletImg
         source: "qrc:/scorched-earth/assets/img/tank_bulletFly1.png"
-        transformOrigin: Item.Bottom
     }
 }
