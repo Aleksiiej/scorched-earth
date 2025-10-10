@@ -103,7 +103,6 @@ SceneBase
 
     function cleanupAfterGame()
     {
-        entityManager.removeEntitiesByFilter(["player"]);
-        entityManager.removeEntitiesByFilter(["projectile"]);
+        entityManager.removeEntityById(player.entityId)
     }
 }
