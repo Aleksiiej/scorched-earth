@@ -12,8 +12,6 @@ EntityBase
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
 
-    signal shot()
-
     Image
     {
         id: tankTurretImg
@@ -78,9 +76,14 @@ EntityBase
 
             if (keys[Qt.Key_Space])
             {
-                shot()
+                handleShot()
             }
         }
+    }
+
+    function handleShot()
+    {
+        parent.shot()
     }
 
     function handleInput(key, pressed)

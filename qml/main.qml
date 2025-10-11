@@ -15,6 +15,12 @@ GameWindow
   minimumHeight: height
   maximumHeight: height
 
+  EntityManager
+  {
+    id: entityManager
+    entityContainer: gameScene
+  }
+
   MenuScene
   {
     id: menuScene

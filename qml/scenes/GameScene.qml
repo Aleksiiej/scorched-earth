@@ -28,12 +28,6 @@ SceneBase
         }
     }
 
-    EntityManager
-    {
-        id: entityManager
-        entityContainer: gameScene
-    }
-
     PhysicsWorld
     {
         id: world
@@ -89,6 +83,22 @@ SceneBase
         y: 50
     }
 
+    function shot()
+    {
+        var turretCenter = player.mapToItem(null,
+                                            player.tankBodyImg.width/2,
+                                            -player.tankBodyImg.height)
+        var newBulletProperties =
+        {
+            x: turretCenter.x,
+            y: turretCenter.y,
+            rotation: player.tankTurretImg.rotation
+        }
+        entityManager.createEntityFromUrlWithProperties(
+                      Qt.resolvedUrl("../entities/Bullet.qml"),
+                      newBulletProperties)
+    }
+
     function prepareNewGame()
     {
         var newPlayerProperties = {
@@ -103,6 +113,6 @@ SceneBase
 
     function cleanupAfterGame()
     {
-        entityManager.removeEntityById(player.entityId)
+        entityManager.removeEntitiesByFilter(["tank", "projectile"])
     }
 }

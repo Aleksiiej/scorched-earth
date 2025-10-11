@@ -4,7 +4,6 @@ import Felgo 4.0
 EntityBase
 {
     id: bulletBase
-    entityId: "bullet"
     entityType: "projectile"
     transformOrigin: Item.Top
 
