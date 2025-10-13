@@ -8,7 +8,7 @@ EntityBase
     entityType: "wall"
     opacity: 0
     width: 0
-    height: parent.height
+    height: 5
 
     BoxCollider
     {

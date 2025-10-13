@@ -30,7 +30,7 @@ EntityBase
         Component.onCompleted:
         {
 
-            var forwardVectorInBody = body.toWorldVector(Qt.point(650, 0))
+            var forwardVectorInBody = body.toWorldVector(Qt.point(0, -1000))
             bulletCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
         }
     }

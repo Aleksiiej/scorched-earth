@@ -62,13 +62,15 @@ SceneBase
     Wall
     {
         id: leftWall
-        anchors.left: parent.left
+        anchors.right: ground1.left
+        anchors.bottom: ground1.top
     }
 
     Wall
     {
         id: rightWall
-        anchors.right: parent.right
+        anchors.left: ground1.right
+        anchors.bottom: ground1.top
     }
 
     GameButton
