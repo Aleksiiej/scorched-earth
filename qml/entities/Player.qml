@@ -8,6 +8,7 @@ EntityBase
     entityType: "tank"
 
     property var keys: ({})
+    property var isReloaded: true
 
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
@@ -74,16 +75,34 @@ EntityBase
                 tankTurretImg.rotation -= 4
             }
 
-            if (keys[Qt.Key_Space])
+            if (keys[Qt.Key_Space] && isReloaded)
             {
                 handleShot()
             }
         }
     }
 
+    Timer
+    {
+        id: reloadTimer
+        interval: 1000
+        running: false
+
+        onTriggered:
+        {
+            isReloaded = true
+            running = false
+        }
+
+
+    }
+
     function handleShot()
     {
         parent.shot()
+        isReloaded = false
+        reloadTimer.running = true
+
     }
 
     function handleInput(key, pressed)
