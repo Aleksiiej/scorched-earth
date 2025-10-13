@@ -93,8 +93,6 @@ EntityBase
             isReloaded = true
             running = false
         }
-
-
     }
 
     function handleShot()
@@ -102,7 +100,6 @@ EntityBase
         parent.shot()
         isReloaded = false
         reloadTimer.running = true
-
     }
 
     function handleInput(key, pressed)

@@ -5,21 +5,15 @@ EntityBase
 {
     id: bulletBase
     entityType: "projectile"
-    transformOrigin: Item.Top
-
-    // Component.onCompleted:
-    // {
-    //     Qt.callLater(function()
-    //     {
-    //         var forwardVectorInBody = bulletCollider.body.toWorldVector(Qt.point(10, 0))
-    //         bulletCollider.applyLinearImpulse(forwardVectorInBody, bulletCollider.getWorldCenter())
-    //     })
-    // }
+    transformOrigin: Item.Center
 
     Image
     {
         id: bulletImg
+        anchors.centerIn: parent
         source: "qrc:/scorched-earth/assets/img/tank_bulletFly1.png"
+        rotation: Math.atan2(bulletCollider.body.linearVelocity.y,
+                             bulletCollider.body.linearVelocity.x) * 180 / Math.PI + 90
     }
 
     BoxCollider
@@ -29,7 +23,6 @@ EntityBase
 
         Component.onCompleted:
         {
-
             var forwardVectorInBody = body.toWorldVector(Qt.point(0, -1000))
             bulletCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
         }
