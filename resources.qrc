@@ -4,5 +4,17 @@
         <file>assets/img/tanks_tankGreen_body3.png</file>
         <file>assets/img/tanks_tankTracks3.png</file>
         <file>assets/img/tank_bulletFly1.png</file>
+        <file>assets/img/animations/tank_explosion1.png</file>
+        <file>assets/img/animations/tank_explosion2.png</file>
+        <file>assets/img/animations/tank_explosion3.png</file>
+        <file>assets/img/animations/tank_explosion4.png</file>
+        <file>assets/img/animations/tank_explosion5.png</file>
+        <file>assets/img/animations/tank_explosion6.png</file>
+        <file>assets/img/animations/tank_explosion7.png</file>
+        <file>assets/img/animations/tank_explosion8.png</file>
+        <file>assets/img/animations/tank_explosion9.png</file>
+        <file>assets/img/animations/tank_explosion10.png</file>
+        <file>assets/img/animations/tank_explosion11.png</file>
+        <file>assets/img/animations/tank_explosion12.png</file>
     </qresource>
 </RCC>
