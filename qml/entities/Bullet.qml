@@ -45,6 +45,10 @@ EntityBase
             bulletImg.opacity = 0
             explosionImg.opacity = 1
             animationTimer.running = true
+            bulletCollider.body.linearVelocity = Qt.point(0, 0)
+            bulletCollider.body.angularVelocity = 0
+            bulletCollider.body.linearDamping = 100
+            bulletCollider.body.active = false
         }
     }
 
