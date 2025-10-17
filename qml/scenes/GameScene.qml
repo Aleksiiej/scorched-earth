@@ -115,6 +115,6 @@ SceneBase
 
     function cleanupAfterGame()
     {
-        entityManager.removeEntitiesByFilter(["tank", "projectile"])
+        entityManager.removeEntitiesByFilter(["tank", "projectile", "animation"])
     }
 }

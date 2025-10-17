@@ -31,5 +31,4 @@ qt_add_qml_module(${PROJECT_NAME}
               qml/entities/Ground.qml
               qml/entities/Wall.qml
               qml/entities/Bullet.qml
-              qml/entities/Explosion.qml
 )
