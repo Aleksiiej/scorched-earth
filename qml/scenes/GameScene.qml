@@ -10,7 +10,9 @@ SceneBase
     anchors.fill: parent
 
     signal backToMenuPressed
+
     property var player: null
+    property var bulletNumber: 0
 
     Keys.onPressed: (event) =>
     {
@@ -94,8 +96,10 @@ SceneBase
         {
             x: turretCenter.x,
             y: turretCenter.y,
-            rotation: player.tankTurretImg.rotation
+            rotation: player.tankTurretImg.rotation,
+            entityId: "bullet_" + bulletNumber
         }
+        bulletNumber = bulletNumber + 1
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Bullet.qml"),
                       newBulletProperties)

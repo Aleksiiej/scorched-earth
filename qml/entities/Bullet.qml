@@ -25,8 +25,8 @@ EntityBase
         anchors.centerIn: parent
         opacity: 1
         source: "qrc:/scorched-earth/assets/img/tank_bulletFly1.png"
-        rotation: Math.atan2(bulletCollider.body.linearVelocity.y,
-                             bulletCollider.body.linearVelocity.x) * 180 / Math.PI + 90
+        rotation: Math.atan(bulletCollider.body.linearVelocity.y,
+                            bulletCollider.body.linearVelocity.x) * 180 / Math.PI + 90
     }
 
     BoxCollider
@@ -72,6 +72,10 @@ EntityBase
             if (currentImage < images.length)
             {
                 currentImage = currentImage + 1
+            }
+            else
+            {
+                entityManager.removeEntityById(entityId)
             }
         }
     }
