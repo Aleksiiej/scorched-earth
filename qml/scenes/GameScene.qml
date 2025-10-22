@@ -47,23 +47,26 @@ SceneBase
     Ground
     {
         id: ground1
+
+        anchors.bottom: statusBar1.top
     }
-    
-    Rectangle
+
+    Sky
     {
-        id: sky
-        color: "skyblue"
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: ground1.top
-        }
+        id: sky1
+
+        anchors.bottom: ground1.top
+    }
+
+    StatusBar
+    {
+        id: statusBar1
     }
 
     Wall
     {
         id: leftWall
+
         anchors.right: ground1.left
         anchors.bottom: ground1.top
     }
@@ -71,6 +74,7 @@ SceneBase
     Wall
     {
         id: rightWall
+
         anchors.left: ground1.right
         anchors.bottom: ground1.top
     }
@@ -109,7 +113,7 @@ SceneBase
     {
         var newPlayerProperties = {
             x: parent.width / 2,
-            y: parent.height - ground1.height - 40
+            y: parent.height - ground1.height - statusBar1.height - 40
         }
         entityManager.createEntityFromUrlWithProperties(
                                Qt.resolvedUrl("../entities/Player.qml"),

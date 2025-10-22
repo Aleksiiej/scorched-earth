@@ -25,6 +25,8 @@ qt_add_qml_module(${PROJECT_NAME}
               qml/common/MenuButton.qml
               qml/common/GameButton.qml
               qml/common/SceneBase.qml
+              qml/common/StatusBar.qml
+              qml/common/Sky.qml
               qml/scenes/GameScene.qml
               qml/scenes/MenuScene.qml
               qml/entities/Player.qml

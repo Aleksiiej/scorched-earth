@@ -9,7 +9,7 @@ GameWindow
   title: "Scorched Earth"
   
   width: 1500
-  height: 1000
+  height: 800
   minimumWidth: width
   maximumWidth: width
   minimumHeight: height
@@ -44,13 +44,13 @@ GameWindow
     State
     {
       name: "menu"
-      PropertyChanges {target: menuScene; opacity: 1;}
+      PropertyChanges {target: menuScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: menuScene}
     },
     State
     {
       name: "game"
-      PropertyChanges {target: gameScene; opacity: 1;}
+      PropertyChanges {target: gameScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
     }
   ]

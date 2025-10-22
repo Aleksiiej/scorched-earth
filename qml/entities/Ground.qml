@@ -7,10 +7,11 @@ EntityBase
     id: groundBase
     entityType: "ground"
     height: 50
-    anchors {
+    
+    anchors
+    {
         left: parent.left
         right: parent.right
-        bottom: parent.bottom
     }
 
     Rectangle
