@@ -8,6 +8,8 @@ Rectangle
     height: 60
     color: "grey"
 
+    property int finalReloadProgress: 25
+
     anchors
     {
         bottom: parent.bottom
@@ -38,7 +40,7 @@ Rectangle
 
         Rectangle
         {
-            id: reloadRect
+            id: reloadBackgroundRect
             Layout.alignment: Qt.AlignHCenter
             color: "red"
             width: parent.width
@@ -48,10 +50,35 @@ Rectangle
             {
                 id: reloadProgressRect
                 anchors.left: parent.left
-                width: parent.width
+                width: reloadBarTimer.reloadProgress * (parent.width / statusBar.finalReloadProgress)
                 height: parent.height
                 color: "green"
             }
         }
+    }
+
+    Timer
+    {
+        id: reloadBarTimer
+        interval: 40
+        running: false
+        repeat: true
+
+        property int reloadProgress: statusBar.finalReloadProgress
+
+        onTriggered:
+        {
+            if(reloadProgress == statusBar.finalReloadProgress)
+            {
+                running = false
+            }
+            reloadProgress = reloadProgress + 1
+        }
+    }
+
+    function reload()
+    {
+        reloadBarTimer.running = true
+        reloadBarTimer.reloadProgress = 0
     }
 }

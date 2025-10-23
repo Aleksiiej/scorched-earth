@@ -44,18 +44,18 @@ SceneBase
         debugDrawVisible: false
     }
 
-    Ground
-    {
-        id: ground1
-
-        anchors.bottom: statusBar1.top
-    }
-
     Sky
     {
         id: sky1
 
         anchors.bottom: ground1.top
+    }
+
+    Ground
+    {
+        id: ground1
+
+        anchors.bottom: statusBar1.top
     }
 
     StatusBar
@@ -107,6 +107,7 @@ SceneBase
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Bullet.qml"),
                       newBulletProperties)
+        statusBar1.reload()
     }
 
     function prepareNewGame()
