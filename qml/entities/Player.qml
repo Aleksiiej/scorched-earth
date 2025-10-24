@@ -9,6 +9,7 @@ EntityBase
 
     property var keys: ({})
     property var isReloaded: true
+    property int hpAmount: 100
 
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
@@ -100,6 +101,15 @@ EntityBase
         parent.shot()
         isReloaded = false
         reloadTimer.running = true
+    }
+
+    function handleGettingShot(hpDamage)
+    {
+        hpAmount = hpAmount - hpDamage
+        if(hpAmount == 0)
+        {
+            console.log("tank destroyed")
+        }
     }
 
     function handleInput(key, pressed)

@@ -33,6 +33,7 @@ EntityBase
     {
         id: bulletCollider
         anchors.fill: bulletImg
+        categories: Box.Category2
 
         Component.onCompleted:
         {
@@ -40,7 +41,7 @@ EntityBase
             bulletCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
         }
 
-        fixture.onBeginContact:
+        fixture.onBeginContact: (other) =>
         {
             bulletImg.opacity = 0
             explosionImg.opacity = 1
@@ -49,6 +50,12 @@ EntityBase
             bulletCollider.body.angularVelocity = 0
             bulletCollider.body.linearDamping = 100
             bulletCollider.body.active = false
+            var body = other.getBody()
+            if(body.target.entityType == "tank")
+            {
+                console.log("HIT!")
+                body.target.handleGettingShot(100)
+            }
         }
     }
 
@@ -69,7 +76,7 @@ EntityBase
 
         onTriggered:
         {
-            if (currentImage < images.length)
+            if (currentImage < images.length - 1)
             {
                 currentImage = currentImage + 1
             }

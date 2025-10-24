@@ -69,7 +69,7 @@ Rectangle
                 Rectangle
                 {
                     anchors.left: parent.left
-                    width: parent.width
+                    width: gameScene.player.hpAmount * (parent.width / 100)
                     height: parent.height
                     color: "green"
                 }
