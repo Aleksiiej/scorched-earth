@@ -32,7 +32,6 @@ SceneBase
 
     PhysicsWorld
     {
-        id: world
         running: true
         gravity.y: 9.81
         z: 10
@@ -46,15 +45,13 @@ SceneBase
 
     Sky
     {
-        id: sky1
-
         anchors.bottom: ground1.top
     }
 
     Ground
     {
         id: ground1
-
+        
         anchors.bottom: statusBar1.top
     }
 

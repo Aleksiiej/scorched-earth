@@ -94,11 +94,11 @@ Rectangle
         running: false
         repeat: true
 
-        property int reloadProgress: statusBar.finalReloadProgress
+        property int reloadProgress: parent.finalReloadProgress
 
         onTriggered:
         {
-            if(reloadProgress == statusBar.finalReloadProgress - 1)
+            if(reloadProgress == parent.finalReloadProgress - 1)
             {
                 running = false
             }
