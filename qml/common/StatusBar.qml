@@ -7,52 +7,82 @@ Rectangle
     id: statusBar
     height: 60
     color: "grey"
-
-    property int finalReloadProgress: 25
-
     anchors
     {
         bottom: parent.bottom
         left: parent.left
         right: parent.right
     }
+    
+    property int finalReloadProgress: 25
 
-    ColumnLayout
+    RowLayout
     {
-        width: 200
-        height: parent.height
-        spacing: 0
+        spacing: 20
 
-        anchors
+        ColumnLayout
         {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-        }
+            width: 200
 
-        Text
-        {
-            id: reloadText
-            Layout.alignment: Qt.AlignHCenter
-            font.pixelSize: 20
-            text: "Reload"
-        }
-
-        Rectangle
-        {
-            id: reloadBackgroundRect
-            Layout.alignment: Qt.AlignHCenter
-            color: "red"
-            width: parent.width
-            height: 20
+            Text
+            {
+                Layout.alignment: Qt.AlignHCenter
+                font.pixelSize: 20
+                text: "Reload"
+            }
 
             Rectangle
             {
-                id: reloadProgressRect
-                anchors.left: parent.left
-                width: reloadBarTimer.reloadProgress * (parent.width / statusBar.finalReloadProgress)
-                height: parent.height
-                color: "green"
+                Layout.alignment: Qt.AlignHCenter
+                color: "red"
+                width: parent.width
+                height: 20
+
+                Rectangle
+                {
+                    anchors.left: parent.left
+                    width: reloadBarTimer.reloadProgress * (parent.width / statusBar.finalReloadProgress)
+                    height: parent.height
+                    color: "green"
+                }
+            }
+        }
+
+        ColumnLayout
+        {
+            width: 200
+
+            Text
+            {
+                Layout.alignment: Qt.AlignHCenter
+                font.pixelSize: 20
+                text: "Hit Points"
+            }
+
+            Rectangle
+            {
+                Layout.alignment: Qt.AlignHCenter
+                color: "red"
+                width: parent.width
+                height: 20
+
+                Rectangle
+                {
+                    anchors.left: parent.left
+                    width: parent.width
+                    height: parent.height
+                    color: "green"
+                }
+            }
+        }
+
+        GameButton
+        {
+            text: "Back to menu"
+            onClicked:
+            {
+                backToMenuPressed()
+                cleanupAfterGame()
             }
         }
     }
@@ -68,7 +98,7 @@ Rectangle
 
         onTriggered:
         {
-            if(reloadProgress == statusBar.finalReloadProgress)
+            if(reloadProgress == statusBar.finalReloadProgress - 1)
             {
                 running = false
             }

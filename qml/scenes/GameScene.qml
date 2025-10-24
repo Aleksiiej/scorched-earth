@@ -79,18 +79,6 @@ SceneBase
         anchors.bottom: ground1.top
     }
 
-    GameButton
-    {
-        text: "Back to Menu"
-        onClicked:
-        {
-            backToMenuPressed()
-            cleanupAfterGame()
-        }
-        x: 50
-        y: 50
-    }
-
     function shot()
     {
         var turretCenter = player.mapToItem(null,
