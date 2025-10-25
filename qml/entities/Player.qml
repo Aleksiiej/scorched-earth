@@ -106,9 +106,9 @@ EntityBase
     function handleGettingShot(hpDamage)
     {
         hpAmount = hpAmount - hpDamage
-        if(hpAmount == 0)
+        if(hpAmount >= 0)
         {
-            console.log("tank destroyed")
+            destroy()
         }
     }
 
