@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Felgo 4.0
+import "../animations"
+
 
 EntityBase
 {
@@ -10,6 +12,7 @@ EntityBase
     property var keys: ({})
     property var isReloaded: true
     property int hpAmount: 100
+    property bool interactionEnabled: true
 
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
@@ -39,6 +42,12 @@ EntityBase
         source: "qrc:/scorched-earth/assets/img/tanks_tankGreen_body3.png"
     }
 
+    Explosion
+    {
+        id: explosion
+        anchors.centerIn: parent
+    }
+
     BoxCollider
     {
         id: playerCollider
@@ -54,31 +63,34 @@ EntityBase
         
         onTriggered:
         {
-            if (keys[Qt.Key_Left] && playerCollider.linearVelocity.x > -250)
+            if(interactionEnabled)
             {
-                playerCollider.force = Qt.point(-200, 0)
-            }
-            else if (keys[Qt.Key_Right] && playerCollider.linearVelocity.x < 250)
-            {
-                playerCollider.force = Qt.point(200, 0)
-            }
-            else
-            {
-                playerCollider.force = Qt.point(0, 0)
-            }
+                if (keys[Qt.Key_Left] && playerCollider.linearVelocity.x > -250)
+                {
+                    playerCollider.force = Qt.point(-200, 0)
+                }
+                else if (keys[Qt.Key_Right] && playerCollider.linearVelocity.x < 250)
+                {
+                    playerCollider.force = Qt.point(200, 0)
+                }
+                else
+                {
+                    playerCollider.force = Qt.point(0, 0)
+                }
 
-            if (keys[Qt.Key_Up] && tankTurretImg.rotation < 100)
-            {
-                tankTurretImg.rotation += 4
-            }
-            if (keys[Qt.Key_Down] && tankTurretImg.rotation > -100)
-            {
-                tankTurretImg.rotation -= 4
-            }
+                if (keys[Qt.Key_Up] && tankTurretImg.rotation < 100)
+                {
+                    tankTurretImg.rotation += 1
+                }
+                if (keys[Qt.Key_Down] && tankTurretImg.rotation > -100)
+                {
+                    tankTurretImg.rotation -= 1
+                }
 
-            if (keys[Qt.Key_Space] && isReloaded)
-            {
-                handleShot()
+                if (keys[Qt.Key_Space] && isReloaded)
+                {
+                    handleShot()
+                }
             }
         }
     }
@@ -98,9 +110,12 @@ EntityBase
 
     function handleShot()
     {
-        parent.shot()
-        isReloaded = false
-        reloadTimer.running = true
+        if(interactionEnabled)
+        {
+            parent.shot()
+            isReloaded = false
+            reloadTimer.running = true
+        }
     }
 
     function handleGettingShot(hpDamage)
@@ -108,7 +123,15 @@ EntityBase
         hpAmount = hpAmount - hpDamage
         if(hpAmount >= 0)
         {
-            destroy()
+            tankTurretImg.opacity = 0
+            tankBodyImg.opacity = 0
+            tankTracksImg.opacity = 0
+            playerCollider.body.linearVelocity = Qt.point(0, 0)
+            playerCollider.body.angularVelocity = 0
+            playerCollider.body.linearDamping = 100
+            playerCollider.body.active = false
+            interactionEnabled = false
+            explosion.startExplosion()
         }
     }
 

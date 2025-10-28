@@ -22,8 +22,9 @@ qt_add_qml_module(${PROJECT_NAME}
     URI scorched-earth
     VERSION 1.0
     QML_FILES qml/main.qml
-              qml/common/MenuButton.qml
+              qml/animations/Explosion.qml
               qml/common/GameButton.qml
+              qml/common/MenuButton.qml
               qml/common/SceneBase.qml
               qml/common/StatusBar.qml
               qml/common/Sky.qml
