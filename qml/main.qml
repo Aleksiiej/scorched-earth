@@ -9,7 +9,7 @@ GameWindow
   title: "Scorched Earth"
   
   width: 1500
-  height: 800
+  height: 1000
   minimumWidth: width
   maximumWidth: width
   minimumHeight: height

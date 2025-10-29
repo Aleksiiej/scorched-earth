@@ -28,7 +28,7 @@ Item
     Timer
     {
         id: animationTimer
-        interval: 250
+        interval: 100
         running: false
         repeat: true
 

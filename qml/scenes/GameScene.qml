@@ -80,8 +80,8 @@ SceneBase
     Timer
     {
         id: missileTimer
-        interval: 1500
-        running: true
+        interval: 1000
+        running: false
         repeat: true
 
         onTriggered:
@@ -115,6 +115,7 @@ SceneBase
         {
             x: Math.random() * gameWindow.width,
             y: 0,
+            rotation: -45 + Math.random() * 90,
             entityId: "missile_" + missileNumber
         }
         missileNumber = missileNumber + 1
@@ -133,6 +134,7 @@ SceneBase
                                Qt.resolvedUrl("../entities/Player.qml"),
                                newPlayerProperties)
         player = entityManager.getLastAddedEntity()
+        missileTimer.running = true
     }
 
     function cleanupAfterGame()

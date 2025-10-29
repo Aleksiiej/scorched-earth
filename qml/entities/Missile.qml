@@ -29,6 +29,12 @@ EntityBase
         anchors.fill: missileImg
         categories: Box.Category2
 
+        Component.onCompleted:
+        {
+            var forwardVectorInBody = body.toWorldVector(Qt.point(0, 200))
+            missileCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
+        }
+
         fixture.onBeginContact: (other) =>
         {
             missileImg.opacity = 0

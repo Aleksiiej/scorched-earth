@@ -24,6 +24,7 @@ Rectangle
         ColumnLayout
         {
             width: 200
+            Layout.leftMargin: 20
 
             Text
             {
@@ -76,15 +77,22 @@ Rectangle
                 }
             }
         }
+    }
 
-        GameButton
+    GameButton
+    {
+        text: "Back to menu"
+        anchors
         {
-            text: "Back to menu"
-            onClicked:
-            {
-                backToMenuPressed()
-                cleanupAfterGame()
-            }
+            verticalCenter: parent.verticalCenter
+            right: parent.right
+            rightMargin: 20
+        }
+
+        onClicked:
+        {
+            backToMenuPressed()
+            cleanupAfterGame()
         }
     }
 
