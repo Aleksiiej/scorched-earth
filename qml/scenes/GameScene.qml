@@ -13,6 +13,7 @@ SceneBase
 
     property var player: null
     property var bulletNumber: 0
+    property var missileNumber: 0
 
     Keys.onPressed: (event) =>
     {
@@ -76,6 +77,19 @@ SceneBase
         anchors.bottom: ground1.top
     }
 
+    Timer
+    {
+        id: missileTimer
+        interval: 1500
+        running: true
+        repeat: true
+
+        onTriggered:
+        {
+            spawnMissile()
+        }
+    }
+
     function shot()
     {
         var turretCenter = player.mapToItem(null,
@@ -93,6 +107,20 @@ SceneBase
                       Qt.resolvedUrl("../entities/Bullet.qml"),
                       newBulletProperties)
         statusBar1.reload()
+    }
+
+    function spawnMissile()
+    {
+        var newMissileProperties =
+        {
+            x: Math.random() * gameWindow.width,
+            y: 0,
+            entityId: "missile_" + missileNumber
+        }
+        missileNumber = missileNumber + 1
+        entityManager.createEntityFromUrlWithProperties(
+                      Qt.resolvedUrl("../entities/Missile.qml"),
+                      newMissileProperties)
     }
 
     function prepareNewGame()

@@ -1,9 +1,10 @@
 <RCC>
     <qresource prefix="/scorched-earth">
-        <file>assets/img/tanks_turret1.png</file>
-        <file>assets/img/tanks_tankGreen_body3.png</file>
-        <file>assets/img/tanks_tankTracks3.png</file>
-        <file>assets/img/tank_bulletFly1.png</file>
+        <file>assets/img/player/tanks_turret1.png</file>
+        <file>assets/img/player/tanks_tankGreen_body3.png</file>
+        <file>assets/img/player/tanks_tankTracks3.png</file>
+        <file>assets/img/projectiles/tank_bulletFly1.png</file>
+        <file>assets/img/projectiles/tank_bulletFly3.png</file>
         <file>assets/img/animations/tank_explosion1.png</file>
         <file>assets/img/animations/tank_explosion2.png</file>
         <file>assets/img/animations/tank_explosion3.png</file>

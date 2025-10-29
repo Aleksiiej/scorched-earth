@@ -20,7 +20,7 @@ EntityBase
     Image
     {
         id: tankTurretImg
-        source: "qrc:/scorched-earth/assets/img/tanks_turret1.png"
+        source: "qrc:/scorched-earth/assets/img/player/tanks_turret1.png"
         anchors.bottom: tankBodyImg.top
         anchors.bottomMargin: -10
         anchors.horizontalCenter: tankBodyImg.horizontalCenter
@@ -31,7 +31,7 @@ EntityBase
     Image
     {
         id: tankTracksImg
-        source: "qrc:/scorched-earth/assets/img/tanks_tankTracks3.png"
+        source: "qrc:/scorched-earth/assets/img/player/tanks_tankTracks3.png"
         anchors.verticalCenter: tankBodyImg.bottom
         anchors.horizontalCenter: tankBodyImg.horizontalCenter
     }
@@ -39,7 +39,7 @@ EntityBase
     Image
     {
         id: tankBodyImg
-        source: "qrc:/scorched-earth/assets/img/tanks_tankGreen_body3.png"
+        source: "qrc:/scorched-earth/assets/img/player/tanks_tankGreen_body3.png"
     }
 
     Explosion
@@ -80,11 +80,11 @@ EntityBase
 
                 if (keys[Qt.Key_Up] && tankTurretImg.rotation < 100)
                 {
-                    tankTurretImg.rotation += 1
+                    tankTurretImg.rotation += 4
                 }
                 if (keys[Qt.Key_Down] && tankTurretImg.rotation > -100)
                 {
-                    tankTurretImg.rotation -= 1
+                    tankTurretImg.rotation -= 4
                 }
 
                 if (keys[Qt.Key_Space] && isReloaded)

@@ -14,7 +14,7 @@ EntityBase
         id: bulletImg
         anchors.centerIn: parent
         opacity: 1
-        source: "qrc:/scorched-earth/assets/img/tank_bulletFly1.png"
+        source: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly1.png"
         rotation: Math.atan(bulletCollider.body.linearVelocity.y,
                             bulletCollider.body.linearVelocity.x) * 180 / Math.PI + 90
     }
