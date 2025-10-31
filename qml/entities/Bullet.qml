@@ -49,6 +49,16 @@ EntityBase
             {
                 body.target.handleGettingShot(100)
             }
+            let tanks = getEntityArrayByType("tank")
+            let distance = 0
+            for(let tank of tanks)
+            {
+                distance = Math.sqrt(Math.pow(tank.x - parent.x, 2) + Math.pow(tank.y - parent.y, 2))
+                if(distance < 100)
+                {
+                    tank.handleGettingShot(Math.floor(100 - distance))
+                }
+            }
             explosion.startExplosion()
         }
     }

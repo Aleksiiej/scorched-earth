@@ -45,7 +45,11 @@ EntityBase
     Explosion
     {
         id: explosion
-        anchors.centerIn: parent
+        anchors
+        {
+            verticalCenter: tankBodyImg.verticalCenter
+            horizontalCenter: tankBodyImg.horizontalCenter
+        }
     }
 
     BoxCollider
@@ -121,7 +125,7 @@ EntityBase
     function handleGettingShot(hpDamage)
     {
         hpAmount = hpAmount - hpDamage
-        if(hpAmount >= 0)
+        if(hpAmount <= 0)
         {
             tankTurretImg.opacity = 0
             tankBodyImg.opacity = 0
