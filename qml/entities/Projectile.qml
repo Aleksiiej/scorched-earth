@@ -5,18 +5,19 @@ import "../animations"
 
 EntityBase
 {
-    id: bulletBase
+    id: projectileBase
     entityType: "projectile"
     transformOrigin: Item.Center
 
+    property var imageSource: ""
+    property var startSpeed: 0
+
     Image
     {
-        id: bulletImg
+        id: missileImg
         anchors.centerIn: parent
         opacity: 1
-        source: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly1.png"
-        rotation: Math.atan(bulletCollider.body.linearVelocity.y,
-                            bulletCollider.body.linearVelocity.x) * 180 / Math.PI + 90
+        source: imageSource
     }
 
     Explosion
@@ -27,23 +28,23 @@ EntityBase
 
     BoxCollider
     {
-        id: bulletCollider
-        anchors.fill: bulletImg
+        id: missileCollider
+        anchors.fill: missileImg
         categories: Box.Category2
 
         Component.onCompleted:
         {
-            var forwardVectorInBody = body.toWorldVector(Qt.point(0, -1000))
-            bulletCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
+            var forwardVectorInBody = body.toWorldVector(Qt.point(0, startSpeed))
+            missileCollider.applyLinearImpulse(forwardVectorInBody, body.getWorldCenter())
         }
 
         fixture.onBeginContact: (other) =>
         {
-            bulletImg.opacity = 0
-            bulletCollider.body.linearVelocity = Qt.point(0, 0)
-            bulletCollider.body.angularVelocity = 0
-            bulletCollider.body.linearDamping = 100
-            bulletCollider.body.active = false
+            missileImg.opacity = 0
+            missileCollider.body.linearVelocity = Qt.point(0, 0)
+            missileCollider.body.angularVelocity = 0
+            missileCollider.body.linearDamping = 100
+            missileCollider.body.active = false
             var body = other.getBody()
             if(body.target.entityType == "tank")
             {

@@ -95,33 +95,37 @@ SceneBase
         var turretCenter = player.mapToItem(null,
                                             player.tankBodyImg.width/2,
                                             -player.tankBodyImg.height)
-        var newBulletProperties =
+        var newProjectileProperties =
         {
             x: turretCenter.x,
             y: turretCenter.y,
             rotation: player.tankTurretImg.rotation,
-            entityId: "bullet_" + bulletNumber
+            entityId: "bullet_" + bulletNumber,
+            imageSource: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly1.png",
+            startSpeed: -1000
         }
         bulletNumber = bulletNumber + 1
         entityManager.createEntityFromUrlWithProperties(
-                      Qt.resolvedUrl("../entities/Bullet.qml"),
-                      newBulletProperties)
+                      Qt.resolvedUrl("../entities/Projectile.qml"),
+                      newProjectileProperties)
         statusBar1.reload()
     }
 
     function spawnMissile()
     {
-        var newMissileProperties =
+        var newProjectileProperties =
         {
             x: Math.random() * gameWindow.width,
             y: 0,
             rotation: -45 + Math.random() * 90,
-            entityId: "missile_" + missileNumber
+            entityId: "missile_" + missileNumber,
+            imageSource: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly3.png",
+            startSpeed: 200
         }
         missileNumber = missileNumber + 1
         entityManager.createEntityFromUrlWithProperties(
-                      Qt.resolvedUrl("../entities/Missile.qml"),
-                      newMissileProperties)
+                      Qt.resolvedUrl("../entities/Projectile.qml"),
+                      newProjectileProperties)
     }
 
     function prepareNewGame()

@@ -30,9 +30,8 @@ qt_add_qml_module(${PROJECT_NAME}
               qml/common/StatusBar.qml
               qml/scenes/GameScene.qml
               qml/scenes/MenuScene.qml
-              qml/entities/Bullet.qml
               qml/entities/Ground.qml
-              qml/entities/Missile.qml
               qml/entities/Player.qml
+              qml/entities/Projectile.qml
               qml/entities/Wall.qml
 )
