@@ -17,6 +17,9 @@ EntityBase
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
 
+    property var centerX: x + tankBodyImg.width / 2
+    property var centerY: y + tankBodyImg.height / 2
+
     Image
     {
         id: tankTurretImg
