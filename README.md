@@ -10,5 +10,6 @@ Project of simple tank shooting game, created to learn about basics of C++ libra
 - Language: C++, Qml
 - Graphics library: Qml, Felgo
 - Physics engine: Box2d
+- Application building tool: CMake
 - Development tool: Visual Studio Code
 - Platform: Linux
