@@ -139,6 +139,7 @@ EntityBase
             playerCollider.body.active = false
             interactionEnabled = false
             explosion.startExplosion()
+            gameScene.isEndgame = true
         }
     }
 

@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle
 {
-    id: menuButton
+    id: commonButton
 
     width: buttonText.width + paddingHorizontal * 2
     height: buttonText.height + paddingVertical * 2
@@ -29,8 +29,8 @@ Rectangle
     {
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: menuButton.clicked()
-        onPressed: menuButton.opacity = 0.5
-        onReleased: menuButton.opacity = 1
+        onClicked: commonButton.clicked()
+        onPressed: commonButton.opacity = 0.5
+        onReleased: commonButton.opacity = 1
     }
 }

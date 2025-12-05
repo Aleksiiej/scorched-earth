@@ -23,8 +23,8 @@ qt_add_qml_module(${PROJECT_NAME}
     VERSION 1.0
     QML_FILES qml/main.qml
               qml/animations/Explosion.qml
-              qml/common/GameButton.qml
-              qml/common/MenuButton.qml
+              qml/common/CommonButton.qml
+              qml/common/EndGame.qml
               qml/common/SceneBase.qml
               qml/common/Sky.qml
               qml/common/StatusBar.qml

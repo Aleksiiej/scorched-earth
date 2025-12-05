@@ -30,14 +30,14 @@ SceneBase
         anchors.centerIn: parent
         spacing: 20
 
-        MenuButton
+        CommonButton
         {
             text: "StartGame"
             Layout.alignment: Qt.AlignHCenter
             
             onClicked: startGamePressed()
         }
-        MenuButton
+        CommonButton
         {
             text: "Exit"
             Layout.alignment: Qt.AlignHCenter

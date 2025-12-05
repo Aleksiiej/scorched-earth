@@ -12,8 +12,10 @@ SceneBase
     signal backToMenuPressed
 
     property var player: null
+    property var playerScore: 0
     property var bulletNumber: 0
     property var missileNumber: 0
+    property var isEndgame: false
 
     Keys.onPressed: (event) =>
     {
@@ -77,6 +79,13 @@ SceneBase
         anchors.bottom: ground1.top
     }
 
+    Loader
+    {
+        id: endGameLoader
+        anchors.centerIn: parent
+        source: isEndgame ? "../common/EndGame.qml" : ""
+    }
+
     Timer
     {
         id: missileTimer
@@ -130,6 +139,8 @@ SceneBase
 
     function prepareNewGame()
     {
+        isEndgame = false
+        playerScore = 0
         var newPlayerProperties = {
             x: parent.width / 2,
             y: parent.height - ground1.height - statusBar1.height - 40

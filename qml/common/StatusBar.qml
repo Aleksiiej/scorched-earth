@@ -77,9 +77,29 @@ Rectangle
                 }
             }
         }
+
+        ColumnLayout
+        {
+            width: 200
+
+            Text
+            {
+                Layout.alignment: Qt.AlignHCenter
+                font.pixelSize: 20
+                text: "Score"
+            }
+
+            Text
+            {
+                id: scoreText
+                Layout.alignment: Qt.AlignHCenter
+                font.pixelSize: 20
+                text: gameScene.playerScore
+            }
+        }
     }
 
-    GameButton
+    CommonButton
     {
         text: "Back to menu"
         anchors

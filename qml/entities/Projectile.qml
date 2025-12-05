@@ -50,6 +50,10 @@ EntityBase
             {
                 body.target.handleGettingShot(100)
             }
+            if(body.target.entityType == "projectile")
+            {
+                gameScene.playerScore += 10
+            }
             let tanks = getEntityArrayByType("tank")
             let distance = 0
             for(let tank of tanks)
