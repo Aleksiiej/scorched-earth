@@ -45,11 +45,8 @@ EntityBase
             missileCollider.body.angularVelocity = 0
             missileCollider.body.linearDamping = 100
             missileCollider.body.active = false
+
             var body = other.getBody()
-            if(body.target.entityType == "tank")
-            {
-                body.target.handleGettingShot(100)
-            }
             if(body.target.entityType == "projectile")
             {
                 gameScene.playerScore += 10

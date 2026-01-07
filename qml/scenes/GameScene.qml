@@ -12,9 +12,12 @@ SceneBase
     signal backToMenuPressed
 
     property var player: null
+
     property var playerScore: 0
     property var bulletNumber: 0
     property var missileNumber: 0
+    property var crateNumber: 0
+
     property var isEndgame: false
 
     Keys.onPressed: (event) =>
@@ -99,6 +102,19 @@ SceneBase
         }
     }
 
+    Timer
+    {
+        id: crateTimer
+        interval: Math.floor(Math.random() * 10000 + 5000)
+        running: false
+        repeat: true
+
+        onTriggered:
+        {
+            spawnCrate()
+        }
+    }
+
     function shot()
     {
         var turretCenter = player.mapToItem(null,
@@ -137,6 +153,21 @@ SceneBase
                       newProjectileProperties)
     }
 
+    function spawnCrate()
+    {
+        var newCrateProperties =
+        {
+            x: Math.random() * gameWindow.width,
+            y: 200,
+            entityId: "crate_" + crateNumber,
+            imageSource: "qrc:/scorched-earth/assets/img/crates/tanks_crateRepair.png"
+        }
+        crateNumber = crateNumber + 1
+        entityManager.createEntityFromUrlWithProperties(
+                      Qt.resolvedUrl("../entities/Crate.qml"),
+                      newCrateProperties)
+    }
+
     function prepareNewGame()
     {
         isEndgame = false
@@ -150,6 +181,13 @@ SceneBase
                                newPlayerProperties)
         player = entityManager.getLastAddedEntity()
         missileTimer.running = true
+        resetTimers()
+    }
+
+    function resetTimers()
+    {
+        missileTimer.running = true
+        crateTimer.running = true
     }
 
     function cleanupAfterGame()

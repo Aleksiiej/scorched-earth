@@ -11,9 +11,9 @@ ColumnLayout
     {
         Layout.alignment: Qt.AlignHCenter
         font.pixelSize: 25
-        text: "You lost! Your score: " + gameScene.playerScore
+        text: "You lost! Your score: " + playerScore
     }
-    
+
     RowLayout
     {
         CommonButton
@@ -21,10 +21,11 @@ ColumnLayout
             text: "Restart game"
             onClicked:
             {
-                gameScene.cleanupAfterGame()
-                gameScene.prepareNewGame()
+                cleanupAfterGame()
+                prepareNewGame()
             }
         }
+        
         CommonButton
         {
             text: "Back to menu"
