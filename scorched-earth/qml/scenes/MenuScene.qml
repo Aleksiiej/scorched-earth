@@ -9,19 +9,17 @@ SceneBase
     id: menuScene
 
     signal startGamePressed
-    signal startLocalMultiplayerGamePressed
 
     Rectangle
     {
         anchors.fill: parent.gameWindowAnchorItem
+        color: "#47688e"
     }
 
     Image
     {
         id: menuBackground
-        source: "../../assets/img/background/Sample.png"
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
+        source: "../assets/img/background/Sample.png"
     }
 
     Text
@@ -40,17 +38,10 @@ SceneBase
 
         CommonButton
         {
-            text: "Start Game"
+            text: "StartGame"
             Layout.alignment: Qt.AlignHCenter
             
             onClicked: startGamePressed()
-        }
-        CommonButton
-        {
-            text: "Local Multiplayer Game"
-            Layout.alignment: Qt.AlignHCenter
-
-            onClicked: startLocalMultiplayerGamePressed()
         }
         CommonButton
         {

@@ -18,5 +18,6 @@
         <file>assets/img/animations/tank_explosion11.png</file>
         <file>assets/img/animations/tank_explosion12.png</file>
         <file>assets/img/crates/tanks_crateRepair.png</file>
+        <file>assets/img/background/Sample.png</file>
     </qresource>
 </RCC>

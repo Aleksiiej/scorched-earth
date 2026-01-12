@@ -11,7 +11,7 @@ ColumnLayout
     {
         Layout.alignment: Qt.AlignHCenter
         font.pixelSize: 25
-        text: "You lost! Your score: " + player1Score
+        text: "You lost! Your score: " + playerScore
     }
 
     RowLayout

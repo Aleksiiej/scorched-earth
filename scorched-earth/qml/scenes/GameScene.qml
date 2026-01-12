@@ -11,52 +11,28 @@ SceneBase
 
     signal backToMenuPressed
 
-    property var player1: null
-    property var player2: null
+    property var player: null
 
-    property var player1Score: 0
-    property var player2Score: 0
-    property var playerNumber: 0
+    property var playerScore: 0
     property var bulletNumber: 0
     property var missileNumber: 0
     property var crateNumber: 0
 
     property var isEndgame: false
-    property var isMultiplayer: false
 
     Keys.onPressed: (event) =>
     {
-        if(player1 && (event.key == Qt.Key_Left
-                   || event.key == Qt.Key_Right
-                   || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down))
+        if(player)
         {
-            player1.handleInput(event.key, true)
-        }
-        if(player2 && (event.key == Qt.Key_A
-                   || event.key == Qt.Key_D
-                   || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S))
-        {
-            player2.handleInput(event.key, true)
+            player.handleInput(event.key, true)
         }
     }
 
     Keys.onReleased: (event) =>
     {
-        if(player1 && (event.key == Qt.Key_Left
-                   || event.key == Qt.Key_Right
-                   || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down))
+        if(player)
         {
-            player1.handleInput(event.key, false)
-        }
-        if(player2 && (event.key == Qt.Key_A
-                   || event.key == Qt.Key_D
-                   || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S))
-        {
-            player2.handleInput(event.key, false)
+            player.handleInput(event.key, false)
         }
     }
 
@@ -195,33 +171,16 @@ SceneBase
     function prepareNewGame()
     {
         isEndgame = false
-        player1Score = 0
+        playerScore = 0
         var newPlayerProperties = {
             x: parent.width / 2,
-            y: parent.height - ground1.height - statusBar1.height - 40,
-            entityId: "player_" + playerNumber
+            y: parent.height - ground1.height - statusBar1.height - 40
         }
-        playerNumber = playerNumber + 1
         entityManager.createEntityFromUrlWithProperties(
                                Qt.resolvedUrl("../entities/Player.qml"),
                                newPlayerProperties)
-        player1 = entityManager.getLastAddedEntity()
-        console.log(isMultiplayer)
-
-        if (isMultiplayer)
-        {
-            newPlayerProperties = {
-                x: parent.width / 2 + 200,
-                y: parent.height - ground1.height - statusBar1.height - 40,
-                entityId: "player_" + playerNumber
-            }
-            playerNumber = playerNumber + 1
-            entityManager.createEntityFromUrlWithProperties(
-                               Qt.resolvedUrl("../entities/Player.qml"),
-                               newPlayerProperties)
-            player2 = entityManager.getLastAddedEntity()
-        }
-
+        player = entityManager.getLastAddedEntity()
+        missileTimer.running = true
         resetTimers()
     }
 
@@ -233,9 +192,6 @@ SceneBase
 
     function cleanupAfterGame()
     {
-        entityManager.removeEntitiesByFilter(["tank",
-                                              "projectile",
-                                              "animation",
-                                              "box"])
+        entityManager.removeEntitiesByFilter(["tank", "projectile", "animation"])
     }
 }

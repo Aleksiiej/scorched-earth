@@ -29,11 +29,6 @@ GameWindow
       gameWindow.state = "game"
       gameScene.prepareNewGame()
     }
-    onStartLocalMultiplayerGamePressed:
-    {
-      gameWindow.state = "localMultiplayer"
-      gameScene.prepareNewGame()
-    }
   }
 
   GameScene
@@ -55,13 +50,7 @@ GameWindow
     State
     {
       name: "game"
-      PropertyChanges {target: gameScene; opacity: 1; isMultiplayer: false}
-      PropertyChanges {target: gameWindow; activeScene: gameScene}
-    },
-    State
-    {
-      name: "localMultiplayer"
-      PropertyChanges {target: gameScene; opacity: 1; isMultiplayer: true}
+      PropertyChanges {target: gameScene; opacity: 1}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
     }
   ]

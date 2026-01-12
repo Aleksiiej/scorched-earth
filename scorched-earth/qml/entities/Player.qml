@@ -6,6 +6,7 @@ import "../animations"
 EntityBase
 {
     id: playerBase
+    entityId: "player"
     entityType: "tank"
 
     property var keys: ({})
@@ -71,11 +72,11 @@ EntityBase
         {
             if(interactionEnabled)
             {
-                if ((keys[Qt.Key_Left] || keys[Qt.Key_A]) && playerCollider.linearVelocity.x > -250)
+                if (keys[Qt.Key_Left] && playerCollider.linearVelocity.x > -250)
                 {
                     playerCollider.force = Qt.point(-200, 0)
                 }
-                else if ((keys[Qt.Key_Right] || keys[Qt.Key_D]) && playerCollider.linearVelocity.x < 250)
+                else if (keys[Qt.Key_Right] && playerCollider.linearVelocity.x < 250)
                 {
                     playerCollider.force = Qt.point(200, 0)
                 }
@@ -84,16 +85,16 @@ EntityBase
                     playerCollider.force = Qt.point(0, 0)
                 }
 
-                if ((keys[Qt.Key_Up] || keys[Qt.Key_W]) && tankTurretImg.rotation < 100)
+                if (keys[Qt.Key_Up] && tankTurretImg.rotation < 100)
                 {
                     tankTurretImg.rotation += 4
                 }
-                if ((keys[Qt.Key_Down] || keys[Qt.Key_S]) && tankTurretImg.rotation > -100)
+                if (keys[Qt.Key_Down] && tankTurretImg.rotation > -100)
                 {
                     tankTurretImg.rotation -= 4
                 }
 
-                if ((keys[Qt.Key_Space] || keys[Qt.Key_Ctrl]) && isReloaded)
+                if (keys[Qt.Key_Space] && isReloaded)
                 {
                     handleShot()
                 }
