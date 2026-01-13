@@ -49,7 +49,8 @@ EntityBase
             var body = other.getBody()
             if(body.target.entityType == "projectile")
             {
-                gameScene.playerScore += 10
+                //TODO: add score for 2nd player in multiplayer mode
+                gameScene.player1Score += 10
             }
             let tanks = getEntityArrayByType("tank")
             let distance = 0

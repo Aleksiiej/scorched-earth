@@ -29,14 +29,16 @@ SceneBase
         if(player1 && (event.key == Qt.Key_Left
                    || event.key == Qt.Key_Right
                    || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down))
+                   || event.key == Qt.Key_Down
+                   || event.key == Qt.Key_Space))
         {
             player1.handleInput(event.key, true)
         }
         if(player2 && (event.key == Qt.Key_A
                    || event.key == Qt.Key_D
                    || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S))
+                   || event.key == Qt.Key_S
+                   || event.key == Qt.Key_Control))
         {
             player2.handleInput(event.key, true)
         }
@@ -139,8 +141,9 @@ SceneBase
         }
     }
 
-    function shot()
+    function shot(entityId)
     {
+        var player = entityManager.getEntityById(entityId)
         var turretCenter = player.mapToItem(null,
                                             player.tankBodyImg.width/2,
                                             -player.tankBodyImg.height)
@@ -206,7 +209,6 @@ SceneBase
                                Qt.resolvedUrl("../entities/Player.qml"),
                                newPlayerProperties)
         player1 = entityManager.getLastAddedEntity()
-        console.log(isMultiplayer)
 
         if (isMultiplayer)
         {

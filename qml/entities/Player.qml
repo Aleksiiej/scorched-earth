@@ -93,9 +93,11 @@ EntityBase
                     tankTurretImg.rotation -= 4
                 }
 
-                if ((keys[Qt.Key_Space] || keys[Qt.Key_Ctrl]) && isReloaded)
+                if ((keys[Qt.Key_Space] || keys[Qt.Key_Control]) && isReloaded)
                 {
                     handleShot()
+                    delete keys[Qt.Key_Space]
+                    delete keys[Qt.Key_Control]
                 }
             }
         }
@@ -118,7 +120,7 @@ EntityBase
     {
         if(interactionEnabled)
         {
-            parent.shot()
+            parent.shot(entityId)
             isReloaded = false
             reloadTimer.running = true
         }

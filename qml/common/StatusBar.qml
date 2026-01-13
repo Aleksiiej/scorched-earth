@@ -8,7 +8,7 @@ Rectangle
     id: statusBar
     height: 60
     color: "grey"
-    
+
     anchors
     {
         bottom: parent.bottom
@@ -95,7 +95,7 @@ Rectangle
                 id: scoreText
                 Layout.alignment: Qt.AlignHCenter
                 font.pixelSize: 20
-                text: gameScene.playerScore
+                text: gameScene.player1Score
             }
         }
     }
