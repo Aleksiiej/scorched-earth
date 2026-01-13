@@ -8,6 +8,7 @@ Rectangle
     id: statusBar
     height: 60
     color: "grey"
+    
     anchors
     {
         bottom: parent.bottom

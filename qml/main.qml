@@ -26,7 +26,7 @@ GameWindow
     id: menuScene
     onStartGamePressed:
     {
-      gameWindow.state = "game"
+      gameWindow.state = "singlePlayer"
       gameScene.prepareNewGame()
     }
     onStartLocalMultiplayerGamePressed:
@@ -54,7 +54,7 @@ GameWindow
     },
     State
     {
-      name: "game"
+      name: "singlePlayer"
       PropertyChanges {target: gameScene; opacity: 1; isMultiplayer: false}
       PropertyChanges {target: gameWindow; activeScene: gameScene}
     },
