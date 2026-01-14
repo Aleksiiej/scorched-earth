@@ -96,8 +96,6 @@ EntityBase
                 if ((keys[Qt.Key_Space] || keys[Qt.Key_Control]) && isReloaded)
                 {
                     handleShot()
-                    delete keys[Qt.Key_Space]
-                    delete keys[Qt.Key_Control]
                 }
             }
         }

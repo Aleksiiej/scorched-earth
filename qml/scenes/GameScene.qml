@@ -49,14 +49,16 @@ SceneBase
         if(player1 && (event.key == Qt.Key_Left
                    || event.key == Qt.Key_Right
                    || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down))
+                   || event.key == Qt.Key_Down
+                   || event.key == Qt.Key_Space))
         {
             player1.handleInput(event.key, false)
         }
         if(player2 && (event.key == Qt.Key_A
                    || event.key == Qt.Key_D
                    || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S))
+                   || event.key == Qt.Key_S
+                   || event.key == Qt.Key_Control))
         {
             player2.handleInput(event.key, false)
         }
@@ -160,7 +162,15 @@ SceneBase
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Projectile.qml"),
                       newProjectileProperties)
-        statusBar1.reload()
+
+        if(player.entityId == player1.entityId)
+        {
+            statusBar1.reloadPlayer1()
+        }
+        else if(player.entityId == player2.entityId)
+        {
+            statusBar1.reloadPlayer2()
+        }
     }
 
     function spawnMissile()
