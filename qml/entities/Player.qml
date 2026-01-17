@@ -12,6 +12,7 @@ EntityBase
     property var isReloaded: true
     property int hpAmount: 100
     property bool interactionEnabled: true
+    property alias playerCollider: playerCollider
 
     property alias tankTurretImg: tankTurretImg
     property alias tankBodyImg: tankBodyImg
@@ -132,13 +133,9 @@ EntityBase
             tankTurretImg.opacity = 0
             tankBodyImg.opacity = 0
             tankTracksImg.opacity = 0
-            playerCollider.body.linearVelocity = Qt.point(0, 0)
-            playerCollider.body.angularVelocity = 0
-            playerCollider.body.linearDamping = 100
-            playerCollider.body.active = false
-            interactionEnabled = false
+            gameScene.disablePlayerControl()
             explosion.startExplosion()
-            gameScene.isEndgame = true
+            gameScene.finishGame()
         }
     }
 

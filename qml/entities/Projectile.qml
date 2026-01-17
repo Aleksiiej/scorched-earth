@@ -11,6 +11,7 @@ EntityBase
 
     property var imageSource: ""
     property var startSpeed: 0
+    property var shooterId: ""
 
     Image
     {
@@ -41,16 +42,12 @@ EntityBase
         fixture.onBeginContact: (other) =>
         {
             missileImg.opacity = 0
-            missileCollider.body.linearVelocity = Qt.point(0, 0)
-            missileCollider.body.angularVelocity = 0
-            missileCollider.body.linearDamping = 100
             missileCollider.body.active = false
 
             var body = other.getBody()
-            if(body.target.entityType == "projectile")
+            if(body.target.entityType == "projectile" && shooterId)
             {
-                //TODO: add score for 2nd player in multiplayer mode
-                gameScene.player1Score += 10
+                gameScene.increaseScore(shooterId, 10)
             }
             let tanks = getEntityArrayByType("tank")
             let distance = 0

@@ -24,21 +24,29 @@ SceneBase
     property var isEndgame: false
     property var isMultiplayer: false
 
+    property var player1Keys: [
+        Qt.Key_Left,
+        Qt.Key_Right,
+        Qt.Key_Up,
+        Qt.Key_Down,
+        Qt.Key_Space
+    ]
+
+    property var player2Keys: [
+        Qt.Key_A,
+        Qt.Key_D,
+        Qt.Key_W,
+        Qt.Key_S,
+        Qt.Key_Control
+    ]
+
     Keys.onPressed: (event) =>
     {
-        if(player1 && (event.key == Qt.Key_Left
-                   || event.key == Qt.Key_Right
-                   || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down
-                   || event.key == Qt.Key_Space))
+        if(player1 && player1Keys.includes(event.key))
         {
             player1.handleInput(event.key, true)
         }
-        if(player2 && (event.key == Qt.Key_A
-                   || event.key == Qt.Key_D
-                   || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S
-                   || event.key == Qt.Key_Control))
+        else if(player2 && player2Keys.includes(event.key))
         {
             player2.handleInput(event.key, true)
         }
@@ -46,19 +54,11 @@ SceneBase
 
     Keys.onReleased: (event) =>
     {
-        if(player1 && (event.key == Qt.Key_Left
-                   || event.key == Qt.Key_Right
-                   || event.key == Qt.Key_Up
-                   || event.key == Qt.Key_Down
-                   || event.key == Qt.Key_Space))
+        if(player1 && player1Keys.includes(event.key))
         {
             player1.handleInput(event.key, false)
         }
-        if(player2 && (event.key == Qt.Key_A
-                   || event.key == Qt.Key_D
-                   || event.key == Qt.Key_W
-                   || event.key == Qt.Key_S
-                   || event.key == Qt.Key_Control))
+        else if(player2 && player2Keys.includes(event.key))
         {
             player2.handleInput(event.key, false)
         }
@@ -86,12 +86,12 @@ SceneBase
     {
         id: ground1
         
-        anchors.bottom: statusBar1.top
+        anchors.bottom: statusBar.top
     }
 
     StatusBar
     {
-        id: statusBar1
+        id: statusBar
     }
 
     Wall
@@ -156,20 +156,33 @@ SceneBase
             rotation: player.tankTurretImg.rotation,
             entityId: "bullet_" + bulletNumber,
             imageSource: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly1.png",
-            startSpeed: -1000
+            startSpeed: -1000,
+            shooterId: player.entityId
         }
-        bulletNumber = bulletNumber + 1
+        bulletNumber++
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Projectile.qml"),
                       newProjectileProperties)
 
         if(player.entityId == player1.entityId)
         {
-            statusBar1.reloadPlayer1()
+            statusBar.reloadPlayer1()
         }
         else if(player.entityId == player2.entityId)
         {
-            statusBar1.reloadPlayer2()
+            statusBar.reloadPlayer2()
+        }
+    }
+
+    function increaseScore(entityId, amount)
+    {
+        if(entityId == player1.entityId)
+        {
+            player1Score += amount
+        }
+        else if(entityId == player2.entityId)
+        {
+            player2Score += amount
         }
     }
 
@@ -184,7 +197,7 @@ SceneBase
             imageSource: "qrc:/scorched-earth/assets/img/projectiles/tank_bulletFly3.png",
             startSpeed: 200
         }
-        missileNumber = missileNumber + 1
+        missileNumber++
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Projectile.qml"),
                       newProjectileProperties)
@@ -199,7 +212,7 @@ SceneBase
             entityId: "crate_" + crateNumber,
             imageSource: "qrc:/scorched-earth/assets/img/crates/tanks_crateRepair.png"
         }
-        crateNumber = crateNumber + 1
+        crateNumber++
         entityManager.createEntityFromUrlWithProperties(
                       Qt.resolvedUrl("../entities/Crate.qml"),
                       newCrateProperties)
@@ -209,12 +222,14 @@ SceneBase
     {
         isEndgame = false
         player1Score = 0
+        player2Score = 0
+        var player1StartX = isMultiplayer ? parent.width / 3 : parent.width / 2
         var newPlayerProperties = {
-            x: parent.width / 2,
-            y: parent.height - ground1.height - statusBar1.height - 40,
+            x: player1StartX,
+            y: parent.height - ground1.height - statusBar.height - 40,
             entityId: "player_" + playerNumber
         }
-        playerNumber = playerNumber + 1
+        playerNumber++
         entityManager.createEntityFromUrlWithProperties(
                                Qt.resolvedUrl("../entities/Player.qml"),
                                newPlayerProperties)
@@ -222,25 +237,43 @@ SceneBase
 
         if (isMultiplayer)
         {
-            newPlayerProperties = {
-                x: parent.width / 2 + 200,
-                y: parent.height - ground1.height - statusBar1.height - 40,
-                entityId: "player_" + playerNumber
-            }
-            playerNumber = playerNumber + 1
+            newPlayerProperties.x = parent.width * 2 / 3
+            playerNumber++
             entityManager.createEntityFromUrlWithProperties(
                                Qt.resolvedUrl("../entities/Player.qml"),
                                newPlayerProperties)
             player2 = entityManager.getLastAddedEntity()
         }
 
-        resetTimers()
+        restartTimers()
     }
 
-    function resetTimers()
+    function finishGame()
     {
-        missileTimer.running = true
-        crateTimer.running = true
+        gameScene.isEndgame = true
+        gameScene.stopTimers()
+    }
+
+    function disablePlayerControl()
+    {
+        let tanks = entityManager.getEntityArrayByType("tank")
+        for(let tank of tanks)
+        {
+            tank.interactionEnabled = false
+            tank.playerCollider.active = false
+        }
+    }
+
+    function restartTimers()
+    {
+        missileTimer.restart()
+        crateTimer.restart()
+    }
+
+    function stopTimers()
+    {
+        missileTimer.stop()
+        crateTimer.stop()
     }
 
     function cleanupAfterGame()
