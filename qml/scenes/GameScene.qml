@@ -166,11 +166,11 @@ SceneBase
 
         if(player.entityId == player1.entityId)
         {
-            statusBar.reloadPlayer1()
+            statusBar.player1StatusBar.reloadPlayer()
         }
         else if(player.entityId == player2.entityId)
         {
-            statusBar.reloadPlayer2()
+            statusBar.player2StatusBar.reloadPlayer()
         }
     }
 
@@ -221,6 +221,7 @@ SceneBase
     function prepareNewGame()
     {
         isEndgame = false
+        playerNumber = 0
         player1Score = 0
         player2Score = 0
         var player1StartX = isMultiplayer ? parent.width / 3 : parent.width / 2
@@ -238,6 +239,7 @@ SceneBase
         if (isMultiplayer)
         {
             newPlayerProperties.x = parent.width * 2 / 3
+            newPlayerProperties.entityId = "player_" + playerNumber
             playerNumber++
             entityManager.createEntityFromUrlWithProperties(
                                Qt.resolvedUrl("../entities/Player.qml"),
@@ -259,8 +261,7 @@ SceneBase
         let tanks = entityManager.getEntityArrayByType("tank")
         for(let tank of tanks)
         {
-            tank.interactionEnabled = false
-            tank.playerCollider.active = false
+            tank.disableInteraction()
         }
     }
 

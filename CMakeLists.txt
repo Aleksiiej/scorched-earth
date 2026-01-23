@@ -25,6 +25,7 @@ qt_add_qml_module(${PROJECT_NAME}
               qml/animations/Explosion.qml
               qml/common/CommonButton.qml
               qml/common/EndGame.qml
+              qml/common/PlayerStatusBar.qml
               qml/common/SceneBase.qml
               qml/common/Sky.qml
               qml/common/StatusBar.qml

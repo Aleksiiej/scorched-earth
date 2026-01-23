@@ -9,6 +9,9 @@ Rectangle
     height: 60
     color: "grey"
 
+    property alias player1StatusBar: player1StatusBar
+    property alias player2StatusBar: player2StatusBar
+
     anchors
     {
         bottom: parent.bottom
@@ -20,251 +23,34 @@ Rectangle
 
     RowLayout
     {
-        id: player1StatusLayout
-        spacing: 20
-
-        Text
+        anchors.fill: parent
+    
+        PlayerStatusBar
         {
-            text: "Player1"
-            Layout.leftMargin: 25
-            font.pixelSize: 25
+            id: player1StatusBar
+            title: "Player 1"
+            playerNumber: 1
+            playerRef: gameScene.player1
         }
 
-        ColumnLayout
+        PlayerStatusBar
         {
-            width: 200
-            Layout.leftMargin: 20
-
-            Text
-            {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Reload"
-            }
-
-            Rectangle
-            {
-                Layout.alignment: Qt.AlignHCenter
-                color: "red"
-                width: parent.width
-                height: 20
-
-                Rectangle
-                {
-                    anchors.left: parent.left
-                    width: player1ReloadBarTimer.player1ReloadProgress * (parent.width / statusBar.finalReloadProgress)
-                    height: parent.height
-                    color: "green"
-                }
-            }
+            id: player2StatusBar
+            title: "Player 2"
+            playerNumber: 2
+            playerRef: gameScene.player2
+            opacity: gameScene.isMultiplayer ? 1 : 0
         }
-
-        ColumnLayout
+    
+        CommonButton
         {
-            width: 200
+            text: "Back to menu"
 
-            Text
+            onClicked:
             {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Hit Points"
-            }
-
-            Rectangle
-            {
-                Layout.alignment: Qt.AlignHCenter
-                color: "red"
-                width: parent.width
-                height: 20
-
-                Rectangle
-                {
-                    anchors.left: parent.left
-                    width: gameScene.player1 ? gameScene.player1.hpAmount * (parent.width / 100) : 0
-                    height: parent.height
-                    color: "green"
-                }
-            }
-        }
-
-        ColumnLayout
-        {
-            width: 200
-
-            Text
-            {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Score"
-            }
-
-            Text
-            {
-                id: scoreTextPlayer1
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: gameScene.player1Score
+                backToMenuPressed()
+                cleanupAfterGame()
             }
         }
     }
-
-    RowLayout
-    {
-        id: player2StatusLayout
-        spacing: 20
-        opacity: gameScene.isMultiplayer ? 1 : 0
-
-        anchors.left: player1StatusLayout.right
-
-        Text
-        {
-            text: "Player2"
-            Layout.leftMargin: 25
-            font.pixelSize: 25
-        }
-
-        ColumnLayout
-        {
-            width: 200
-            Layout.leftMargin: 20
-
-            Text
-            {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Reload"
-            }
-
-            Rectangle
-            {
-                Layout.alignment: Qt.AlignHCenter
-                color: "red"
-                width: parent.width
-                height: 20
-
-                Rectangle
-                {
-                    anchors.left: parent.left
-                    width: player2ReloadBarTimer.player2ReloadProgress * (parent.width / statusBar.finalReloadProgress)
-                    height: parent.height
-                    color: "green"
-                }
-            }
-        }
-
-        ColumnLayout
-        {
-            width: 200
-
-            Text
-            {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Hit Points"
-            }
-
-            Rectangle
-            {
-                Layout.alignment: Qt.AlignHCenter
-                color: "red"
-                width: parent.width
-                height: 20
-
-                Rectangle
-                {
-                    anchors.left: parent.left
-                    width: gameScene.player2 ? gameScene.player2.hpAmount * (parent.width / 100) : 0
-                    height: parent.height
-                    color: "green"
-                }
-            }
-        }
-
-        ColumnLayout
-        {
-            width: 200
-
-            Text
-            {
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: "Score"
-            }
-
-            Text
-            {
-                id: scoreTextPlayer2
-                Layout.alignment: Qt.AlignHCenter
-                font.pixelSize: 20
-                text: gameScene.player2Score
-            }
-        }
-    }
-
-    CommonButton
-    {
-        text: "Back to menu"
-        anchors
-        {
-            verticalCenter: parent.verticalCenter
-            right: parent.right
-            rightMargin: 20
-        }
-
-        onClicked:
-        {
-            backToMenuPressed()
-            cleanupAfterGame()
-        }
-    }
-
-    Timer
-    {
-        id: player1ReloadBarTimer
-        interval: 40
-        running: false
-        repeat: true
-
-        property int player1ReloadProgress: parent.finalReloadProgress
-
-        onTriggered:
-        {
-            if(player1ReloadProgress == parent.finalReloadProgress - 1)
-            {
-                running = false
-            }
-            player1ReloadProgress = player1ReloadProgress + 1
-        }
-    }
-
-    Timer
-    {
-        id: player2ReloadBarTimer
-        interval: 40
-        running: false
-        repeat: true
-
-        property int player2ReloadProgress: parent.finalReloadProgress
-
-        onTriggered:
-        {
-            if(player2ReloadProgress == parent.finalReloadProgress - 1)
-            {
-                running = false
-            }
-            player2ReloadProgress = player2ReloadProgress + 1
-        }
-    }
-
-    function reloadPlayer1()
-    {
-        player1ReloadBarTimer.running = true
-        player1ReloadBarTimer.player1ReloadProgress = 0
-    }
-
-    function reloadPlayer2()
-    {
-        player2ReloadBarTimer.running = true
-        player2ReloadBarTimer.player2ReloadProgress = 0
-    }
-}
+}   

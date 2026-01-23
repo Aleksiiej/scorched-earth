@@ -143,4 +143,10 @@ EntityBase
     {
         keys[key] = pressed
     }
+
+    function disableInteraction()
+    {
+        interactionEnabled = false
+        playerCollider.active = false
+    }
 }
